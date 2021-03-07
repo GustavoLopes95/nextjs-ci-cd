@@ -16,6 +16,15 @@ jobs:
     steps:
     - uses: actions/checkout@v2
 
+    - name: Beanstalk Deploy init
+      uses: hmanzur/actions-aws-eb@v1.0.0
+      with:
+        command: "init 'nextjs-ci-cd' -r 'us-east-1' -p node.js-14"
+      env:
+        AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        AWS_DEFAULT_REGION: "us-east-1"
+
     - name: Beanstalk Deploy for app
       uses: hmanzur/actions-aws-eb@v1.0.0
       with:
